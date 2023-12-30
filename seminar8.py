@@ -68,11 +68,25 @@ def edit_contact(f):
     with open(f, 'w', encoding='utf-8') as fd:
         fd.writelines(res)
 
+def copy_contact(file):
+    new_file = 'copied_contacts.txt'
+    res = search_contacts(file)
+    print_contacts(res)
+    select_contact = int(input('Выберите индекс контакта для копирования: '))
+    all_contacts = get_contacts_from_file(file)
+    copied_data = []
+    for i in all_contacts:
+        if str(select_contact) == i[0]:
+            copied_data = (f"{','.join(i[1:])}\n")
+    print(copied_data)
+    with open(new_file, 'w', encoding='utf-8') as fd:
+        fd.writelines(copied_data)
+
 
 def main():
     file_name = 'contacts.txt'
     while True:
-        user_answer = input('Выберите для записи - 1, для чтения - 2, для поиска - 3, редактировать контакт - 4, для выхода - 0: ')
+        user_answer = input('Выберите для записи - 1, для чтения - 2, для поиска - 3, редактировать контакт - 4, для копирования - 5, для выхода - 0: ')
         if user_answer == '1':
             add_contact(file_name)
         elif user_answer == '2':
@@ -81,6 +95,8 @@ def main():
             print_contacts(search_contacts(file_name))
         elif user_answer == '4':
             edit_contact(file_name)
+        elif user_answer == '5':
+            copy_contact(file_name)
         elif user_answer == '0':
             print('Спасибо за использование нашей программы')
             break
