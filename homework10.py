@@ -21,5 +21,3 @@ for i in lst:
 
 one_hot_data = pd.DataFrame({'one_hot_list':one_hot_list})
 print(one_hot_data)
-
-
